@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>idealdish.rec - discover many recipe</title>
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Story+Script&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: #84994F;
+      color: #333;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    /* Header Styles */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      margin-bottom: 30px;
+    }
+    
+    .page-title {
+      color: #EFF5D2;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .top-right-btn {
+      background: #EFF5D2;
+      color: #5a6e37;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    .top-right-btn:hover {
+      background: #5a6e37;
+      color: #EFF5D2;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Main Content */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      text-align: center;
+      color: #EFF5D2;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 1.5px;
+      margin-bottom: 40px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: #EFF5D2;
+      border-radius: 3px;
+    }
+    
+    /* Dishes Grid */
+    .dishes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    .dish-card {
+      background: #EFF5D2;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .dish-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .dish-image {
+      width: 100%;
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dish-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .dish-card:hover .dish-image img {
+      transform: scale(1.05);
+    }
+    
+    .dish-tag {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #EFF5D2;
+      color: #5a6e37;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+    
+    .dish-info {
+      padding: 20px;
+    }
+    
+    .dish-title {
+      font-family: "Bebas Neue", sans-serif;
+      color: #5a6e37;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    
+    .dish-description {
+      color: #5a6e37;
+      margin-bottom: 15px;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+    
+    .dish-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #84994F;
+      font-size: 0.9rem;
+      border-top: 1px solid #d8e2a9;
+      padding-top: 15px;
+    }
+    
+    /* Button Container */
+    .btn-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+    
+    .recipe-btn {
+      background: #EFF5D2;
+      color: #5a6e37;
+      border: none;
+      padding: 16px 45px;
+      border-radius: 40px;
+      font-size: 1.3rem;
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .recipe-btn:hover {
+      background: #5a6e37;
+      color: #EFF5D2;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .dishes-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .page-title {
+        font-size: 2.3rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      
+      .dishes-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .page-title {
+        font-size: 2rem;
+      }
+      
+      .recipe-btn {
+        padding: 14px 35px;
+        font-size: 1.1rem;
+      }
+    }
+    /* User Recipes Section */
+.user-recipes-section {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 2px solid #EFF5D2;
+}
+
+.user-recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.user-recipe-card {
+  background: #EFF5D2;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.user-recipe-card:hover {
+  transform: translateY(-5px);
+}
+
+.user-recipe-header {
+  background: #5a6e37;
+  padding: 15px 20px;
+  color: #EFF5D2;
+}
+
+.user-recipe-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.user-recipe-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.user-recipe-body {
+  padding: 20px;
+}
+
+.user-recipe-section {
+  margin-bottom: 20px;
+}
+
+.user-recipe-section-title {
+  font-family: "Bebas Neue", sans-serif;
+  color: #5a6e37;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #d8e2a9;
+}
+
+.user-recipe-ingredients, .user-recipe-instructions {
+  padding-left: 20px;
+}
+
+.user-recipe-ingredients li, .user-recipe-instructions li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: #5a6e37;
+}
+
+.user-recipe-notes {
+  background: #f9fbeb;
+  padding: 15px;
+  border-radius: 8px;
+  font-style: italic;
+  border-left: 3px solid #5a6e37;
+  color: #5a6e37;
+}
+
+.user-recipe-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.empty-state {
+  text-align: center;
+  color: #EFF5D2;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-top: 30px;
+  grid-column: 1 / -1;
+}
+
+.empty-state i {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.empty-state p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header with title and button -->
+    <div class="header">
+      <h1 class="page-title">Discover Amazing Recipes</h1>
+      <a href="Recipe.html">
+      <button class="top-right-btn">Make your recipe</button>
+      </a>
+    </div>
+    
+    <!-- Trending recipes section -->
+    <h2 class="section-title">Trending Now</h2>
+    
+    <div class="dishes-grid">
+      <!-- Dish 1 -->
+      <div class="dish-card">
+        <div class="dish-image">
+          <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFzdGF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Creamy Garlic Pasta">
+          <span class="dish-tag">Trending</span>
+        </div>
+        <div class="dish-info">
+          <h3 class="dish-title">Creamy Garlic Pasta</h3>
+          <p class="dish-description">Creamy pasta with roasted garlic, parmesan cheese, and fresh herbs. A comforting dish that's ready in 20 minutes.</p>
+          <div class="dish-meta">
+            <span>⭐ 4.8 (320)</span>
+            <span>25 mins</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Dish 2 -->
+      <div class="dish-card">
+        <div class="dish-image">
+          <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGhhaSUyMGN1cnJ5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Spicy Thai Curry">
+          <span class="dish-tag">Spicy</span>
+        </div>
+        <div class="dish-info">
+          <h3 class="dish-title">Spicy Thai Curry</h3>
+          <p class="dish-description">Aromatic Thai curry with coconut milk, vegetables, and your choice of protein. Perfectly balanced spicy and sweet flavors.</p>
+          <div class="dish-meta">
+            <span>⭐ 4.7 (285)</span>
+            <span>35 mins</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Dish 3 -->
+      <div class="dish-card">
+        <div class="dish-image">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVkaXRlcnJhbmVhbiUyMGJvd2x8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Mediterranean Bowl">
+          <span class="dish-tag">Healthy</span>
+        </div>
+        <div class="dish-info">
+          <h3 class="dish-title">Mediterranean Bowl</h3>
+          <p class="dish-description">Fresh quinoa base with roasted vegetables, feta cheese, olives, and lemon herb dressing. Healthy and delicious.</p>
+          <div class="dish-meta">
+            <span>⭐ 4.9 (410)</span>
+            <span>30 mins</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Dish 4 - NEW TRENDING DISH -->
+      <div class="dish-card">
+  <div class="dish-image">
+    <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a29yZWFuJTIwZnJpZWQlMjBjaGlja2VufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Crispy Korean Fried Chicken">
+    <span class="dish-tag">Trending</span>
+  </div>
+  <div class="dish-info">
+    <h3 class="dish-title">Crispy Korean Fried Chicken</h3>
+    <p class="dish-description">Double-fried extra crispy chicken coated in sweet and spicy gochujang sauce. The ultimate crunchy comfort food!</p>
+    <div class="dish-meta">
+      <span>⭐ 4.9 (520)</span>
+      <span>45 mins</span>
+    </div>
+  </div>
+</div>
+      
+          <!-- Dish 5 -->
+      <div class="dish-card">
+        <div class="dish-image">
+          <img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFzYWduYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Three Cheese Lasagna">
+          <span class="dish-tag">Comfort</span>
+        </div>
+        <div class="dish-info">
+          <h3 class="dish-title">Three Cheese Lasagna</h3>
+          <p class="dish-description">Layers of pasta, rich tomato sauce, and a blend of mozzarella, ricotta, and parmesan cheeses. Baked to perfection.</p>
+          <div class="dish-meta">
+            <span>⭐ 4.9 (520)</span>
+            <span>50 mins</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Dish 6 -->
+      <div class="dish-card">
+        <div class="dish-image">
+          <img src="https://images.unsplash.com/photo-1624353365286-3f8d62daad51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hvY29sYXRlJTIwbGF2YSUyMGNha2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Chocolate Lava Cake">
+          <span class="dish-tag">Dessert</span>
+        </div>
+        <div class="dish-info">
+          <h3 class="dish-title">Chocolate Lava Cake</h3>
+          <p class="dish-description">Warm chocolate cake with a molten center, served with vanilla ice cream. The perfect decadent dessert.</p>
+          <div class="dish-meta">
+            <span>⭐ 4.9 (380)</span>
+            <span>25 mins</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- User Recipes Section -->
+  <section class="user-recipes-section">
+    <h2 class="section-title">Your Created Recipes</h2>
+    <div id="userRecipesContainer" class="user-recipes-grid">
+      <!-- User recipes will be loaded here by JavaScript -->
+    </div>
+  </section>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const userRecipesContainer = document.getElementById('userRecipesContainer');
+    
+    // Function to load and display user recipes
+    function loadUserRecipes() {
+      // Clear existing content
+      userRecipesContainer.innerHTML = '';
+      
+      // Get recipes from localStorage
+      const recipes = JSON.parse(localStorage.getItem('userRecipes')) || [];
+      
+      if (recipes.length === 0) {
+        // Show empty state if no recipes
+        userRecipesContainer.innerHTML = `
+          <div class="empty-state">
+            <i class='bx bx-bowl-hot'></i>
+            <p>You haven't created any recipes yet.</p>
+            <a href="Recipe.html">
+              <button class="recipe-btn">Create Your First Recipe</button>
+            </a>
+          </div>
+        `;
+        return;
+      }
+      
+      // Display each recipe
+      recipes.forEach(recipe => {
+        const recipeEl = document.createElement('div');
+        recipeEl.className = 'user-recipe-card';
+        
+        // Format time if available
+        const totalTime = recipe.prepTime || recipe.cookTime ? 
+          `${parseInt(recipe.prepTime || 0) + parseInt(recipe.cookTime || 0)} mins` : 
+          'Not specified';
+        
+        // Create ingredients list
+        const ingredientsList = recipe.ingredients && recipe.ingredients.length > 0 ? 
+          recipe.ingredients.map(ing => `<li>${ing}</li>`).join('') : 
+          '<li>No ingredients specified</li>';
+        
+        // Create instructions list
+        const instructionsList = recipe.instructions && recipe.instructions.length > 0 ? 
+          recipe.instructions.map((inst, i) => `<li>${inst}</li>`).join('') : 
+          '<li>No instructions specified</li>';
+        
+        // Image HTML
+        const imageHtml = recipe.image ? 
+          `<img src="${recipe.image}" alt="${recipe.title}" class="user-recipe-image">` : 
+          '';
+        
+        recipeEl.innerHTML = `
+          ${imageHtml}
+          <div class="user-recipe-header">
+            <h3 class="user-recipe-title">${recipe.title || 'Untitled Recipe'}</h3>
+            <div class="user-recipe-meta">
+              <span>${recipe.servings ? `${recipe.servings} servings` : 'Servings not specified'}</span>
+              <span>${totalTime}</span>
+            </div>
+          </div>
+          <div class="user-recipe-body">
+            <div class="user-recipe-section">
+              <h4 class="user-recipe-section-title">Description</h4>
+              <p>${recipe.description || 'No description provided.'}</p>
+            </div>
+            
+            <div class="user-recipe-section">
+              <h4 class="user-recipe-section-title">Ingredients</h4>
+              <ul class="user-recipe-ingredients">
+                ${ingredientsList}
+              </ul>
+            </div>
+            
+            <div class="user-recipe-section">
+              <h4 class="user-recipe-section-title">Instructions</h4>
+              <ol class="user-recipe-instructions">
+                ${instructionsList}
+              </ol>
+            </div>
+            
+            ${recipe.notes ? `
+              <div class="user-recipe-section">
+                <h4 class="user-recipe-section-title">Notes</h4>
+                <div class="user-recipe-notes">${recipe.notes}</div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+        
+        userRecipesContainer.appendChild(recipeEl);
+      });
+    }
+    
+    // Load recipes when page loads
+    loadUserRecipes();
+  });
+</script>
+</body>
+</html>

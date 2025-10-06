@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>idealdish.rec</title>
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Story+Script&display=swap" rel="stylesheet">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Story Script", sans-serif;
+    }
+    body{
+      background: #84994F;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    nav{
+      color: #fff;
+      font-size: 2rem;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-icons {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .nav-icon {
+      background: transparent;
+      border: none;
+      color: #EFF5D2;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px;
+      border-radius: 50%;
+    }
+    
+    .nav-icon:hover {
+      color: #fff;
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+   hr {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0 30px;
+   }
+    
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      padding: 30px;
+      text-align: center;
+      min-height: 80vh;
+    }
+    
+    .divpar {
+      max-width: 800px;
+      margin-bottom: 40px;
+    }
+    
+    .divpar p{
+      font-size: 4rem;
+      color: #fff;
+      font-family: "Bebas Neue", sans-serif;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .divpar .prep{
+      font-family: "Bebas Neue", sans-serif;
+      font-weight: normal;
+      color: #EFF5D2;
+      font-size: 1.4rem;
+      line-height: 1.6;
+      letter-spacing: 1px;
+    }
+    
+    .btnlog{
+      background: transparent;
+      padding: 15px 40px;
+      border: 2px solid #EFF5D2;
+      border-radius: 40px;
+      color: #fff;
+      font-size: 1.5rem;
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btnlog:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #EFF5D2;
+      transition: all 0.4s ease;
+      z-index: -1;
+    }
+    
+    .btnlog:hover {
+      color: #84994F;
+    }
+    
+    .btnlog:hover:before {
+      left: 0;
+    }
+    
+    /* About Section */
+    .about-section {
+      background: #EFF5D2;
+      padding: 80px 30px;
+      margin-top: 60px;
+    }
+    
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .about-title {
+      font-family: "Bebas Neue", sans-serif;
+      color: #5a6e37;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 50px;
+      letter-spacing: 2px;
+    }
+    
+    .about-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      align-items: center;
+    }
+    
+    .about-text {
+      color: #5a6e37;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    
+    .feature-card {
+      background: #f9fbeb;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      border: 2px solid #d8e2a9;
+      transition: transform 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      color: #5a6e37;
+      margin-bottom: 15px;
+    }
+    
+    .feature-title {
+      font-family: "Bebas Neue", sans-serif;
+      color: #5a6e37;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    
+    .feature-desc {
+      color: #5a6e37;
+      font-size: 0.95rem;
+    }
+    
+    /* Contact Section */
+    .contact-section {
+      background: #5a6e37;
+      padding: 80px 30px;
+      text-align: center;
+    }
+    
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .contact-title {
+      font-family: "Bebas Neue", sans-serif;
+      color: #EFF5D2;
+      font-size: 3rem;
+      margin-bottom: 50px;
+      letter-spacing: 2px;
+    }
+    
+    .contact-info {
+      background: #EFF5D2;
+      padding: 40px;
+      border-radius: 15px;
+      display: inline-block;
+      text-align: left;
+    }
+    
+    .info-title {
+      font-family: "Bebas Neue", sans-serif;
+      color: #5a6e37;
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      color: #5a6e37;
+    }
+    
+    .contact-icon {
+      font-size: 1.5rem;
+      margin-right: 15px;
+      color: #5a6e37;
+    }
+    
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Animation for the text */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .divpar p {
+      animation: fadeInUp 1s ease forwards;
+    }
+    
+    .divpar .prep {
+      animation: fadeInUp 1s ease 0.3s forwards;
+      opacity: 0;
+    }
+    
+    .btnlog {
+      animation: fadeInUp 1s ease 0.6s forwards;
+      opacity: 0;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .divpar p {
+        font-size: 3rem;
+      }
+      
+      .divpar .prep {
+        font-size: 1.2rem;
+      }
+      
+      .btnlog {
+        font-size: 1.2rem;
+        padding: 12px 30px;
+      }
+      
+      .about-title, .contact-title {
+        font-size: 2.5rem;
+      }
+      
+      .features {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-info {
+        padding: 30px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      nav {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      
+      .divpar p {
+        font-size: 2.5rem;
+      }
+      
+      .divpar .prep {
+        font-size: 1rem;
+      }
+      
+      .about-section, .contact-section {
+        padding: 60px 20px;
+      }
+      
+      .contact-info {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h2>IdealDIsh.</h2>
+    <div class="nav-icons">
+      <button class="nav-icon" onclick="scrollToSection('about')">
+        <i class='bx bx-info-circle'></i>
+      </button>
+      <button class="nav-icon" onclick="scrollToSection('contact')">
+        <i class='bx bx-phone'></i>
+      </button>
+    </div>
+  </nav>
+  <hr>
+  
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="divpar">
+      <p class="par">
+        Make your recipe
+      </p>
+      <p class="prep">
+        Discover the joy of cooking with IdealDIsh. Create, share, and enjoy delicious recipes from around the world. 
+        Whether you're a beginner or a master chef, we have everything you need to bring your culinary visions to life.
+      </p>
+    </div>
+    
+    <a href="Login.html" target="_blank">
+      <button class="btnlog">Get Started Now</button>
+    </a>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="about-container">
+      <h2 class="about-title">About IdealDIsh</h2>
+      
+      <div class="about-content">
+        <div>
+          <p class="about-text">
+            Welcome to IdealDIsh, your ultimate culinary companion! We believe that everyone has a chef inside them, 
+            waiting to create amazing dishes that bring joy to themselves and others.
+          </p>
+          
+          <p class="about-text">
+            Founded with a passion for food and community, IdealDIsh brings together food lovers from around the world 
+            to share, discover, and create delicious recipes. Whether you're cooking for one, feeding a family, or 
+            hosting a dinner party, we've got you covered.
+          </p>
+        </div>
+        
+        <div class="features">
+          <div class="feature-card">
+            <i class='bx bx-restaurant feature-icon'></i>
+            <h3 class="feature-title">Create Recipes</h3>
+            <p class="feature-desc">Build and save your own recipes with our easy-to-use creator</p>
+          </div>
+          
+          <div class="feature-card">
+            <i class='bx bx-share-alt feature-icon'></i>
+            <h3 class="feature-title">Share & Discover</h3>
+            <p class="feature-desc">Share your creations and discover recipes from our community</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="contact-container">
+      <h2 class="contact-title">Contact Us</h2>
+      
+      <div class="contact-info">
+        <h3 class="info-title">Get In Touch</h3>
+        
+        <div class="contact-item">
+          <i class='bx bx-envelope contact-icon'></i>
+          <div>
+            <strong>Email</strong><br>
+            hello@idealdish.rec
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <i class='bx bx-phone contact-icon'></i>
+          <div>
+            <strong>Phone</strong><br>
+            +1 (555) 123-4567
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <i class='bx bx-map contact-icon'></i>
+          <div>
+            <strong>Address</strong><br>
+            123 Recipe Street<br>
+            Foodville, FK 12345
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <i class='bx bx-time contact-icon'></i>
+          <div>
+            <strong>Hours</strong><br>
+            Mon-Fri: 9AM-6PM<br>
+            Sat-Sun: 10AM-4PM
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  </script>
+</body>
+</html>
